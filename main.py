@@ -21,7 +21,7 @@ def randomiser():
 
 class QuizStarter:
   def __init__(self, parent):
-    background_color="red"
+    background_color="Black"
    
     self.quiz_frame = Frame(parent, bg = background_color, padx=100, pady=100)
     self.quiz_frame.grid()
@@ -40,7 +40,7 @@ class QuizStarter:
     self.continue_button = Button(self.quiz_frame, text="Continue", font=( "Helvetica","13","bold"), bg="white",command=self.name_collection)
     self.continue_button.grid(row=3,padx=20, pady=20)
 
-
+  
 
   def name_collection(self):
         name=self.entry_box.get()
@@ -48,9 +48,20 @@ class QuizStarter:
         self.quiz_frame.destroy()
         Quiz(root)
 
-
+def name_collection(self):
+        name=self.entry_box.get()
+        names.append(name)
+        self.quiz_frame.destroy()
+        InstructionsStarter(root)
   
-
+class InstructionsStarter:
+  def __init__(self, parent):
+    background_color="Black"
+   
+    self.quiz_frame = Frame(parent, bg = background_color, padx=100, pady=100)
+    self.quiz_frame.grid()
+    self.heading_label=Label(self.quiz_frame, text = "General Knowledge Quiz", font =( "Tw Cen MT","18","bold"),bg="gold")
+    self.heading_label.grid(row= 0, padx=20)
 class Quiz:
 
    def __init__(self, parent):
@@ -129,3 +140,4 @@ if __name__ == "__main__":
   root.title("NZ Road Rules Quiz")
   quiz_instance = QuizStarter(root)
   root.mainloop()
+
