@@ -5,8 +5,8 @@ global questions_answers
 asked = []
 
 questions_answers = {
-    1: ["What is the smallest country in the world?", 'Speed up to get out of the way', 'Slow down and drive carefully','Slow down and stop', 'Drive on as usual' ,'Slow down and stop',3],
-    2: ["You may stop on a motorway only:",'if there is an emergency','To let down or pick up passengers','to make a U-turn','to stop and take a photo', 'if there is an emergency',1],
+    1: ["What is the smallest country in the world?", 'Vatican City', 'Monaco','Guam', 'Fiji' ,1],
+    2: ["Which country is the origin of the cocktail Mojito?:",'Cuba','Columbia','Argentina','Brazil',1],
     3: ["When coming up to a pedestrian crossing without a raised traffic island, what must you do?", 'Speed up before the pedestrians cross','Stop and give way to pedestrians on any part of the crossing', 'Sound the horn on your vehicle to warn the perestrians','slow down to 30kmh','Stop and give way to pedestrians on any part of the crossing',2],
 }
 
@@ -26,21 +26,19 @@ class QuizStarter:
     self.quiz_frame = Frame(parent, bg = background_color, padx=100, pady=100)
     self.quiz_frame.grid()
 
-    self.heading_label=Label(self.quiz_frame, text = "General Knowledge Quiz", font =( "Tw Cen MT","18","bold"),bg="white")
+    self.heading_label=Label(self.quiz_frame, text = "General Knowledge Quiz", font =( "times new roman","18","bold"),bg="gold")
     self.heading_label.grid(row= 0, padx=20)
 
     self.var1=IntVar()
 
-    self.user_label=Label(self.quiz_frame, text="Please Enter your Username Below: ", font=( "Tw Cen MT","18","bold"),bg="white")
+    self.user_label=Label(self.quiz_frame, text="Please Enter your Username Below: ", font=( "times new roman","18","bold"),bg="gold")
     self.user_label.grid(row=1, padx=20, pady=20)
 
     self.entry_box=Entry(self.quiz_frame)
     self.entry_box.grid(row=2,padx=20, pady=20)
 
-    self.continue_button = Button(self.quiz_frame, text="Continue", font=( "Helvetica","13","bold"), bg="white",command=self.name_collection)
+    self.continue_button = Button(self.quiz_frame, text="Continue", font=( "times new roman","13","bold"), bg="gold",command=self.name_collection)
     self.continue_button.grid(row=3,padx=20, pady=20)
-
-  
 
   def name_collection(self):
         name=self.entry_box.get()
@@ -48,48 +46,35 @@ class QuizStarter:
         self.quiz_frame.destroy()
         Quiz(root)
 
-def name_collection(self):
-        name=self.entry_box.get()
-        names.append(name)
-        self.quiz_frame.destroy()
-        InstructionsStarter(root)
-  
-class InstructionsStarter:
-  def __init__(self, parent):
-    background_color="Black"
-   
-    self.quiz_frame = Frame(parent, bg = background_color, padx=100, pady=100)
-    self.quiz_frame.grid()
-    self.heading_label=Label(self.quiz_frame, text = "General Knowledge Quiz", font =( "Tw Cen MT","18","bold"),bg="gold")
-    self.heading_label.grid(row= 0, padx=20)
+
 class Quiz:
 
    def __init__(self, parent):
-    background_color="red"
+    background_color="black"
    
     self.quiz_frame = Frame(parent, bg = background_color, padx=40, pady=40)
     self.quiz_frame.grid()
 
     randomiser()
 
-    self.question_label=Label(self.quiz_frame, text = questions_answers[qnum][0], font =( "Tw Cen MT","18","bold"))
+    self.question_label=Label(self.quiz_frame, text = questions_answers[qnum][0], font =(  "Tw Cen MT","18","bold"),bg="gold")
     self.question_label.grid(row= 0, padx=10, pady=10)  
 
     self.var1=IntVar()
 
-    self.rb1 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
+    self.rb1 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][1], font=("Helvetica", "12"), bg="gold", value=1, variable=self.var1, pady=10)
     self.rb1.grid(row=1, sticky=W)
 
-    self.rb2 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
+    self.rb2 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][2], font=("Helvetica", "12"), bg="gold", value=1, variable=self.var1, pady=10)
     self.rb2.grid(row=2, sticky=W)
 
-    self.rb3 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
+    self.rb3 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][3], font=("Helvetica", "12"), bg="gold", value=1, variable=self.var1, pady=10)
     self.rb3.grid(row=3, sticky=W)
 
-    self.rb4 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg=background_color, value=1, variable=self.var1, pady=10)
+    self.rb4 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][4], font=("Helvetica", "12"), bg="gold", value=1, variable=self.var1, pady=10)
     self.rb4.grid(row=4, sticky=W)
 
-    self.confirm_button = Button(self.quiz_frame, text="Confrim",bg="white",command=self.test_progress)
+    self.confirm_button = Button(self.quiz_frame, text="Confrim",bg="gold",command=self.test_progress)
     self.confirm_button.grid(row=6)
      
      
@@ -104,35 +89,36 @@ class Quiz:
 
  
    def test_progress(self):
-      global score
+      def test_progress(self):
+       global score
+      score = 0
       scr_label=self.score_label
       choice=self.var1.get()
       if len(asked)>9:
         if choice == questions_answers[qnum][6]:
           score +=1
-          sc_label.configure(text=score)
-          self.confirm_button.config(text-"Confirm")
+          scr_label.configure(text=score)
+          self.confirm_button.config(text="Confirm")
         else:
           score+=0
-          sc_label.configure(text-"The correct answer was: "+ questionsanswers[qnum][5] )
-          self.confirm_button.config(text-"confirm")
+          scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5] )
+          self.confirm_button.config(text="confirm")
      
       else:
             if choice==0:
-              self.confirm_button.config(text-"Try Again, you didn't select an option then submit again" )
+              self.confirm_button.config(text="Try Again, you didn't select an option then submit again" )
               choice=self.var1.get()
             else:
               if choice == questions_answers[qnum][6]:
                 score+=1
-                sc_label.configure(text=score)
-                self.confrim_button.config(text-"confirm")
+                scr_label.configure(text=score)
+                self.confirm_button.config(text="confirm")
                 self.questions_setup()
  
               else:
                   score+=0
-                  scr_label.configure(text-"The correct answer was: "
-                                      + questions_answers [qnum][5])
-                  self.confrim_button.config(text-"Confirmn")
+                  scr_label.configure(text="The correct answer was: " + questions_answers[qnum][5])
+                  self.confirm_button.config(text="Confirm")
                   self.questions_setup()
        
 if __name__ == "__main__":
@@ -140,4 +126,3 @@ if __name__ == "__main__":
   root.title("NZ Road Rules Quiz")
   quiz_instance = QuizStarter(root)
   root.mainloop()
-
