@@ -44,9 +44,33 @@ class QuizStarter:
         name=self.entry_box.get()
         names.append(name)
         self.quiz_frame.destroy()
+        Instructionsstarter(root)
+
+class Instructionsstarter:
+  def __init__(self, parent):
+    background_color="Black"
+   
+    self.instructions_frame = Frame(parent, bg = background_color, padx=100, pady=100)
+    self.instructions_frame.grid()
+
+    self.heading_label=Label(self.instructions_frame, text = "Instructions", font =( "times new roman","18","bold"),bg="gold")
+    self.heading_label.grid(row= 0, padx=20)
+
+    self.var1=IntVar()
+
+    self.user_label=Label(self.instructions_frame, text="This is a general knowledge quiz which will \n test your knowledge about \n all topics around the world. Every time you \n get a question right you will have 1 \n point added to your score and \n when you get a question wrong no points will \n be added to your score. Good Luck and Have Fun ",font=( "times new roman","18","bold"),bg="gold")
+    self.user_label.grid(row=1, padx=20, pady=20)
+
+    
+
+    self.continue_button = Button(self.instructions_frame, text="Continue", font=( "times new roman","13","bold"), bg="gold",command=self.name_collection)
+    self.continue_button.grid(row=3,padx=20, pady=20)
+
+  def name_collection(self):
+        self.instructions_frame.destroy()
         Quiz(root)
 
-
+    
 class Quiz:
 
    def __init__(self, parent):
@@ -123,6 +147,6 @@ class Quiz:
        
 if __name__ == "__main__":
   root = Tk()
-  root.title("NZ Road Rules Quiz")
+  root.title("General Knowledge Quiz")
   quiz_instance = QuizStarter(root)
   root.mainloop()
