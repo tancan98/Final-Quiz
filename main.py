@@ -5,7 +5,7 @@ score=0
 asked = []
 asked = []
 #my dictionary which has all my questions and answers
-questions_answers = {
+question_solution = {
     1: ["What is the smallest country in the world?", 'Vatican City', 'Monaco','Guam', 'Fiji' ,'Vatican City',1],
     2: ["Which country is the origin of the cocktail Mojito?:",'Cuba','Columbia','Argentina','Brazil','Cuba',1],
     3: ["Who came second in the FIFA Women's World Cup in 2019?", 'Argentina','USA', 'Netherlands','Jamaica','Netherlads',3],
@@ -78,10 +78,10 @@ class Instructionsstarter:
         self.instructions_frame.destroy()
         Quiz(root)
 
-# this is where the quiz starts and where the questions will be displayed   
-class Quiz:
 
-   def __init__(self, parent):
+# this is where the quiz starts and where the questions will be displayed   
+class Quiz:#Quiz page
+  def __init__(self, parent):
     background_color="black"
    
     self.quiz_frame = Frame(parent, bg = background_color, padx=40, pady=40)
@@ -89,72 +89,120 @@ class Quiz:
 
     randomiser()
 
-    self.question_label=Label(self.quiz_frame, text = questions_answers[qnum][0], font =(  "times new roman","18","bold"),bg="gold")
+    self.question_label=Label(self.quiz_frame, text = question_solution [qnum][0], font =(  "times new roman","18","bold"),bg="gold")
     self.question_label.grid(row= 0, padx=10, pady=10)  
 
     self.var1=IntVar()
 
-    self.rb1 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][1], font=("times new roman", "12"), bg="gold", value=1, variable=self.var1, pady=10)
+    self.rb1 = Radiobutton (self.quiz_frame, text = question_solution [qnum][1], font=("times new roman", "12"), bg="gold", value=1, variable=self.var1, pady=10)
     self.rb1.grid(row=1, sticky=W)
 
-    self.rb2 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][2], font=("times new roman", "12"), bg="gold", value=2, variable=self.var1, pady=10)
+    self.rb2 = Radiobutton (self.quiz_frame, text = question_solution [qnum][2], font=("times new roman", "12"), bg="gold", value=2, variable=self.var1, pady=10)
     self.rb2.grid(row=2, sticky=W)
 
-    self.rb3 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][3], font=("times new roman", "12"), bg="gold", value=3, variable=self.var1, pady=10)
+    self.rb3 = Radiobutton (self.quiz_frame, text = question_solution [qnum][3], font=("times new roman", "12"), bg="gold", value=3, variable=self.var1, pady=10)
     self.rb3.grid(row=3, sticky=W)
 
-    self.rb4 = Radiobutton (self.quiz_frame, text = questions_answers[qnum][4], font=("times new roman", "12"), bg="gold", value=4, variable=self.var1, pady=10)
+    self.rb4 = Radiobutton (self.quiz_frame, text = question_solution [qnum][4], font=("times new roman", "12"), bg="gold", value=4, variable=self.var1, pady=10)
     self.rb4.grid(row=4, sticky=W)
 
     self.confirm_button = Button(self.quiz_frame, text="Confrim",bg="gold",command=self.test_progress)
     self.confirm_button.grid(row=6)
 
     self.score_label  = Label (text ='score')
-    self.score_label.grid(row= 7) 
+    self.score_label.grid(row= 7)     
+    
+    
      
-
-  
-   def questions_setup(self):
-     self.var1.set(0)
+     
+  def questions_system(self):
      randomiser()
      self.var1.set(0)
-     self.question_label.config(text=questions_answers[qnum][0])
-     self.rb1.config(text=questions_answers[qnum][1])
-     self.rb2.config(text=questions_answers[qnum][2])
-     self.rb3.config(text=questions_answers[qnum][3])
-     self.rb4.config(text=questions_answers[qnum][4])
+     self.question_label.config(text=question_solution [qnum][0])
+     self.rb1.config(text=question_solution [qnum][1])
+     self.rb2.config(text=question_solution [qnum][2])
+     self.rb3.config(text=question_solution [qnum][3])
+     self.rb4.config(text=question_solution [qnum][4])
 
- #this is the score system that tells the users what their score is
-   def test_progress(self):
-      global score
-      scr_label=self.score_label
+#this is the score system that tells the users what their score is
+  def test_progress(self):
+      global score 
+      scr_tab=self.score_label
       choice=self.var1.get()
-      if len(asked)>9:
-        if choice == questions_answers[qnum][6]:
-          score +=1
-          scr_label.configure(text=score)
-          self.confirm_button.config(text="Confirm")
+      if len(asked)>9: #  finds out the last question of the quiz
+        if choice == question_solution [qnum][6]: # checks that the key is correct and stores the answer in index 6
+          score +=1 # one point is added to score
+          scr_tab.configure(text=score)  # will show the new score
+          self.confirm_button.config(text="Confirm") # confirm button will change to given text
+          self.end_screen() # opens the end page when the quiz is done
         else:
           score+=0
-          scr_label.configure(text="The correct answer was: "+ questions_answers[qnum][5] )
+          scr_tab.configure(text="The correct answer was: "+ question_solution [qnum][5] )#tells user the answer is incorrect and tell the user the right answer
           self.confirm_button.config(text="confirm")
      
       else:
             if choice==0:
-              self.confirm_button.config(text="Try Again, you didn't select an option then submit again" )
+              self.confirm_button.config(text=" Please Try Again, you didn't select an answer then submit again" )#when the user has no selected the option this message shows up
               choice=self.var1.get()
             else:
-              if choice == questions_answers[qnum][6]:
+              if choice == question_solution [qnum][6]:
                 score+=1
-                scr_label.configure(text=score)
+                scr_tab.configure(text=score)
                 self.confirm_button.config(text="confirm")
-                self.questions_setup()
-     
+                self.questions_system()
+      
               else:
                   score+=0
-                  scr_label.configure(text="The correct answer was: " + questions_answers[qnum][5])
+                  scr_tab.configure(text="The correct answer was: " + question_solution [qnum][5])##tells user the answer is incorrect and tell the user the right answer
                   self.confirm_button.config(text="Confirmn")
-                  self.questions_setup()
+                  self.questions_system()
+
+
+  def end_screen(self):
+    root.destroy()#destroys quiz page
+    name = names[0]
+    open_end_object = end()#opens end page
+
+
+
+class end:# End page
+
+
+  def __init__(self):
+        background_color = 'black' #Background color
+        global end_root
+        end_root = Tk()
+        end_root.title('Exit Box') #page title
+        end_root.geometry('600x600') #page size
+
+        self.end_frame = Frame(end_root, width=700, height=600,bg=background_color)
+        self.end_frame.grid(row=1)
+
+        self.end_title = Label(end_root,text='Thank You For Participating The Quiz  ',  font=('times new roman', 22, 'bold'), bg="gold") #main heading
+        self.end_title.place(x=15, y=35) #heading location
+
+        self.exit_button = Button(end_root,text='Exit',width=10,bg='gold',font=('times new roman', 12, 'bold'),command=self.close_end,) #Exit button
+        self.exit_button.place(x=260, y=200) #Location of the heading
+
+        self.list_tab = Label(end_root, text='Please try again if you want to' + str(names),font=('times new roman', 12, 'bold'),width=40, bg="gold") #try again label
+        self.list_tab.place(x=110, y=80) #label location
+        
+        self.final_score = Label(end_root, text=' Final score is ' + str(score), font=('times new roman', 12, 'bold'), width=40, bg="gold") #final score is displayed
+        self.final_score.place(x=110, y=150)#label location
+        
+  
+  
+  def close_end(self):
+      self.end_frame.destroy()
+      self.end_title.destroy()
+      self.exit_button.destroy()
+      self.list_tab.destroy()
+      end_root.destroy()
+  
+    
+
+
+
 if __name__ == "__main__":
   root = Tk()
   root.title("General Knowledge Quiz")
