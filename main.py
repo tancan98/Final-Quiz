@@ -45,6 +45,8 @@ class IntroductionStarter:
     self.entry_box=Entry(self.quiz_frame)
     self.entry_box.grid(row=2,padx=20, pady=20)
 
+
+
     self.continue_button = Button(self.quiz_frame, text="Continue", font=( "times new roman","13","bold"), bg="gold",command=self.name_collection)
     self.continue_button.grid(row=3,padx=20, pady=20)
 
