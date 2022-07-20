@@ -64,7 +64,7 @@ class IntroductionStarter:
                                  'username is not to the required length')
       elif name.isnumeric():
             messagebox.showerror('error has happened!', 'Username can only have letters!')
-      elif not name.isalpha(): # to make sure that letters are entered not number
+      elif not name.replace(' ','').isalpha: # to make sure that letters are entered not number
         messagebox.showerror('error has happened!', 'No Foreign Symbols! Please Enter Username Again!')
       else:# to make sure letteres are entered not symbols
         name=self.entry_case.get()
