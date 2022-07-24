@@ -70,9 +70,9 @@ class IntroductionStarter:
         name=self.entry_case.get()
         names.append(name)#adds name to the list
         self.quiz_frame.destroy()#destroys quiz frame
-        Instructionsstarter(root)#take user to the nest page
+        InstructionsStarter(root)#take user to the nest page
 #this is my instructions page and its job is to explain what the quiz is about and how it works
-class Instructionsstarter:
+class InstructionsStarter:
   def __init__(self, parent):
     background_color="Black"#background colour
    
@@ -129,7 +129,7 @@ class Quiz:#Quiz page
     self.confirm_button.grid(row=6)#confirm button
 
 
-    self.leave_tab = Button(self.quiz_frame, text="Leave",bg="red",command=self.end_screen)
+    self.leave_tab = Button(self.quiz_frame, text="Leave",bg="red",command=self.end_window)
     self.leave_tab.grid(row=4)#leave button
       
     
@@ -158,12 +158,12 @@ class Quiz:#Quiz page
           score +=1 # one point is added to score
           scr_tab.configure(text=score)  # will show the new score
           self.confirm_button.config(text="Confirm") # confirm button will change to given text
-          self.end_screen() # opens the end page when the quiz is done
+          self.end_window() # opens the end page when the quiz is done
         else:
           score+=0
           scr_tab.configure(text="The correct answer was: "+ question_solution [qnum][5] )#tells user the answer is incorrect and tell the user the right answer
           self.confirm_button.config(text="Confirm")
-          self.end_screen()
+          self.end_window()
      
       else:
             if choice==0:
@@ -183,14 +183,14 @@ class Quiz:#Quiz page
                   self.questions_system()
 
 
-  def end_screen(self):
+  def end_window(self):
     root.destroy()#destroys quiz page
     name = names[0]
-    open_end_object = end()#opens end page
+    open_end_object = End()#opens end page
 
 
 
-class end:# End page
+class End:# End page
 
 
   def __init__(self):
